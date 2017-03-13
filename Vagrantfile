@@ -67,6 +67,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.trigger.after :destroy do
-    run_remote "/vagrant/conf/vagrant/after_destroy.sh"
+    run "/vagrant/conf/vagrant/after_destroy.sh"
   end
 end
