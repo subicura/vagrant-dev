@@ -1,0 +1,20 @@
+---
+- name: Installing Zsh
+  apt: pkg=zsh state=latest
+  become: true
+
+- name: Installing oh-my-zsh from git
+  git:
+    repo=https://github.com/robbyrussell/oh-my-zsh
+    dest=~/.oh-my-zsh
+
+- name: Creating new ~/.zshrc
+  template:
+    src: zshrc
+    dest: ~/.zshrc
+
+- name: Changing user default shell
+  user:
+    name: ubuntu
+    shell: /bin/zsh
+  become: true

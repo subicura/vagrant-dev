@@ -1,0 +1,25 @@
+---
+- name: Installing Vim
+  apt: pkg=vim state=latest
+  become: true
+
+- name: Installing vundle
+  git: 
+    repo: "https://github.com/gmarik/Vundle.vim.git"
+    dest: "~/.vim/bundle/Vundle.vim"
+    update: yes
+  notify: Install vundle
+
+- name: Installing vim spacegray theme
+  git: 
+    repo: "https://github.com/ajh17/Spacegray.vim.git"
+    dest: "~/.vim/bundle/Spacegray.vim"
+    update: yes
+
+- name: Copying vim theme
+  shell: mkdir -p ~/.vim/colors/ && cp ~/.vim/bundle/Spacegray.vim/colors/spacegray.vim ~/.vim/colors/
+  
+- name: Creating new ~/.vimrc
+  template:
+    src: vimrc
+    dest: ~/.vimrc

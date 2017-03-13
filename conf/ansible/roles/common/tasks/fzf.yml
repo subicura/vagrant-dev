@@ -1,0 +1,17 @@
+---
+- name: Installing fzf from git
+  git: 
+    repo: "https://github.com/junegunn/fzf.git"
+    dest: "~/.fzf"
+    update: yes
+
+- name: Installing fzf bin and unarchive
+  unarchive:
+    src: "https://github.com/junegunn/fzf-bin/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-linux_amd64.tgz"
+    dest: "~/.fzf/bin"
+    remote_src: True
+
+- name: Creating new ~/.fzf.zsh
+  template:
+    src: fzf.zsh
+    dest: ~/.fzf.zsh
